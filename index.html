@@ -1,168 +1,728 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Color Day Celebration</title>
+<meta name="theme-color" content="#090305">
+<title>For Mehak Shahzadi | A Thousand Apologies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-:root{--ink:#282044;--pink:#ff4fa3;--purple:#7657ff;--yellow:#ffd84d;--cyan:#55dff2}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff0f7,#f1edff 45%,#e7fbff);min-height:100vh}
-header{text-align:center;padding:48px 18px 30px;background:linear-gradient(120deg,#ff5ca8,#8a5cff,#28cbe0);color:white}
-header h1{font-size:clamp(2.2rem,7vw,4.5rem);margin:0 0 12px;text-shadow:0 4px 12px #0002}header p{font-size:1.08rem;margin:0}
-main{max-width:1050px;margin:24px auto;padding:0 16px 50px}.panel{background:#ffffffdf;border:1px solid #fff;border-radius:24px;padding:24px;margin:18px 0;box-shadow:0 12px 35px #5c3c8520}
-h2{margin:0 0 16px;color:#6745d8}.colors{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
-.color{border:0;border-radius:16px;padding:18px 8px;color:#241b39;font-weight:800;cursor:pointer;transition:.2s}.color:hover{transform:translateY(-4px) scale(1.02)}
-#chosen{font-weight:bold;margin-top:14px;min-height:24px}
-form{display:grid;gap:12px}input,textarea{width:100%;padding:14px;border:1px solid #d9d2ee;border-radius:12px;font:inherit;background:white}textarea{min-height:95px;resize:vertical}
-button.submit{border:0;border-radius:13px;padding:14px 20px;background:linear-gradient(90deg,#ff4fa3,#7657ff);color:white;font-size:1rem;font-weight:bold;cursor:pointer}
-#status{min-height:24px;font-weight:bold}.wish-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.wish{background:linear-gradient(135deg,#fff1f8,#f2efff);padding:16px;border-radius:15px;border-left:5px solid #ff66aa;overflow-wrap:anywhere}.wish strong{display:block;margin-bottom:7px}.wish small{color:#766b8e}
-.activities{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.activity{padding:17px;border-radius:16px;background:#f4f0ff}.activity b{display:block;margin-bottom:6px}
-footer{text-align:center;padding:20px;color:#706482}
-.confetti{position:fixed;top:-20px;width:10px;height:16px;pointer-events:none;z-index:9;animation:fall 3.2s linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
-@media(max-width:600px){header{padding-top:36px}.panel{padding:18px}}
+:root{
+ --black:#080305;
+ --dark:#15070b;
+ --red:#9c102b;
+ --red2:#ed3157;
+ --gold:#d9b878;
+ --cream:#f8e8d8;
+ --muted:#bd9da5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ background:var(--black);
+ color:var(--cream);
+ font-family:Poppins,sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+#background{
+ position:fixed;inset:0;z-index:-3;
+ background:
+ radial-gradient(ellipse at 50% 90%,#5d1023 0%,transparent 55%),
+ radial-gradient(ellipse at 10% 10%,#301018 0%,transparent 50%),
+ #080305;
+}
+#stars,#petals{
+ position:fixed;inset:0;pointer-events:none;overflow:hidden;
+}
+#stars{z-index:-1}
+.star{
+ position:absolute;width:2px;height:2px;border-radius:50%;
+ background:#f8d6b0;box-shadow:0 0 10px #e9a7a7;
+ animation:twinkle 3s infinite alternate;
+}
+@keyframes twinkle{to{opacity:.15;transform:scale(.4)}}
+.petal{
+ position:absolute;top:-40px;
+ animation:fall linear infinite;
+ filter:drop-shadow(0 0 7px #ff385e);
+}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(700deg);opacity:.1}
+}
+header{
+ position:fixed;top:0;left:0;width:100%;z-index:30;
+ padding:13px 20px;
+ display:flex;align-items:center;justify-content:space-between;
+ background:#090305b8;backdrop-filter:blur(15px);
+ border-bottom:1px solid #d9b87825;
+}
+.brand{
+ font-family:Cinzel,serif;color:var(--gold);
+ letter-spacing:3px;font-size:12px;
+}
+.header-actions{display:flex;gap:8px}
+.small-btn{
+ padding:9px 13px;border:1px solid #d9b87855;
+ border-radius:30px;background:#ffffff08;color:var(--gold);
+ font-size:11px;
+}
+.screen{
+ display:none;min-height:100svh;
+ padding:105px 18px 55px;
+ align-items:center;justify-content:center;
+ flex-direction:column;text-align:center;
+ animation:screenIn 1s ease;
+}
+.screen.active{display:flex}
+@keyframes screenIn{
+ from{opacity:0;transform:translateY(22px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.eyebrow{
+ color:var(--gold);font-size:10px;
+ letter-spacing:5px;text-transform:uppercase;
+ margin-bottom:18px;
+}
+h1,h2,h3{font-family:Cinzel,serif}
+h1{
+ font-size:clamp(36px,8vw,78px);
+ line-height:1.15;color:#f4c5c4;
+ text-shadow:0 0 35px #c61f42;
+}
+h2{font-size:clamp(28px,6vw,48px);color:#edb5b7}
+h3{color:var(--gold);font-size:19px}
+p{line-height:1.9;color:#d9c1c3}
+.gold{color:var(--gold)}
+.muted{color:var(--muted)}
+.glass{
+ width:min(720px,96%);
+ padding:30px 23px;
+ background:linear-gradient(140deg,#ffffff0d,#ffffff03);
+ border:1px solid #d9b8783b;
+ border-radius:22px;
+ box-shadow:0 20px 80px #0009,0 0 40px #a9163020;
+ backdrop-filter:blur(16px);
+}
+.primary,.secondary{
+ border-radius:40px;padding:13px 24px;
+ margin:8px;font-size:12px;letter-spacing:1px;
+ transition:.3s;
+}
+.primary{
+ border:1px solid #e9b878;
+ background:linear-gradient(120deg,#7d0b23,#d3294d);
+ color:white;box-shadow:0 0 22px #d6294b44;
+}
+.secondary{
+ border:1px solid #d9b87877;
+ background:#ffffff08;color:var(--gold);
+}
+.primary:hover,.secondary:hover{
+ transform:translateY(-3px) scale(1.04);
+ box-shadow:0 0 30px #d6294b88;
+}
+input,textarea{
+ width:100%;background:#0c0608;color:white;
+ border:1px solid #d9b87855;border-radius:12px;
+ padding:13px;margin:9px 0;outline:none;
+}
+input:focus,textarea:focus{border-color:var(--gold)}
+textarea{min-height:120px;resize:vertical}
+.divider{
+ height:1px;width:90px;background:var(--gold);
+ margin:22px auto;opacity:.6;
+}
+.hero-rose{
+ font-size:100px;margin:10px;
+ filter:drop-shadow(0 0 30px #d51d43);
+ animation:roseFloat 4s infinite ease-in-out;
+}
+@keyframes roseFloat{
+ 50%{transform:translateY(-15px) rotate(8deg)}
+}
+.heart{
+ font-size:95px;
+ filter:drop-shadow(0 0 25px #f12654);
+ animation:heartbeat 1.5s infinite;
+}
+@keyframes heartbeat{
+ 0%,100%{transform:scale(1)}
+ 15%{transform:scale(1.18)}
+ 30%{transform:scale(1)}
+ 45%{transform:scale(1.12)}
+}
+
+/* LOCK */
+#lock{
+ min-height:100svh;display:flex;
+ align-items:center;justify-content:center;
+ padding:20px;
+}
+.lock-card{
+ width:min(430px,100%);text-align:center;
+ padding:40px 25px;border-radius:25px;
+ background:linear-gradient(145deg,#1d080e,#090305);
+ border:1px solid #d9b87866;
+ box-shadow:0 0 90px #c51a3c22;
+}
+.lock-icon{font-size:65px;margin:20px}
+.lock-error{color:#ff748c;min-height:25px;font-size:12px}
+#app{display:none}
+
+/* ROSE GARDEN */
+.garden{
+ display:flex;align-items:center;justify-content:center;
+ flex-wrap:wrap;gap:15px;padding:30px 0;
+ perspective:800px;
+}
+.garden-rose{
+ font-size:70px;cursor:pointer;
+ transition:transform .3s;
+ filter:drop-shadow(0 0 15px #b5183d);
+}
+.garden-rose:hover{
+ transform:rotateY(35deg) rotateX(20deg) scale(1.4);
+}
+.tilt-card{
+ transform-style:preserve-3d;
+ transition:transform .15s;
+}
+
+/* HEART REPAIR */
+.heart-stage{
+ width:260px;height:200px;position:relative;
+ display:grid;place-items:center;margin:30px auto;
+}
+.heart-piece{
+ position:absolute;font-size:90px;
+ filter:drop-shadow(0 0 15px #ff234f);
+ transition:all 2s cubic-bezier(.2,.8,.2,1);
+}
+.heart-piece.left{transform:translateX(-65px) rotate(-20deg)}
+.heart-piece.right{transform:translateX(65px) rotate(20deg)}
+.heart-stage.fixed .left{transform:translateX(0) rotate(0)}
+.heart-stage.fixed .right{transform:translateX(0) rotate(0)}
+
+/* LETTER */
+.letter{
+ background:linear-gradient(145deg,#f6e4d0,#e8c5b6);
+ color:#47151d;
+ padding:30px 23px;border-radius:5px;
+ max-width:550px;margin:25px auto;
+ box-shadow:0 15px 50px #0009;
+ font-family:"Cormorant Garamond",serif;
+ font-size:22px;line-height:1.8;
+ text-align:left;
+ display:none;
+}
+.letter.show{display:block;animation:screenIn 1s}
+
+/* GALLERY */
+.gallery{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px;margin:20px 0;
+}
+.photo{
+ min-height:170px;border:1px dashed #d9b87888;
+ border-radius:14px;overflow:hidden;
+ background:#ffffff08;display:grid;
+ place-items:center;color:var(--gold);
+ font-size:13px;
+}
+.photo img{width:100%;height:190px;object-fit:cover}
+.photo input{font-size:10px}
+.upload-area{margin-top:15px}
+
+/* CHAPTERS */
+.chapter-list{
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px;
+ margin:20px 0;
+}
+.chapter{
+ border:1px solid #d9b87855;background:#ffffff08;
+ color:var(--gold);border-radius:30px;padding:9px 13px;
+ font-size:10px;
+}
+.chapter.current{background:#9c102b;color:white}
+.footer{margin-top:35px;font-size:10px;color:#9b7883;letter-spacing:2px}
+#fireworks{position:fixed;inset:0;z-index:50;pointer-events:none}
+#toast{
+ position:fixed;bottom:25px;left:50%;
+ transform:translateX(-50%);z-index:60;
+ background:#260911;border:1px solid var(--gold);
+ color:white;padding:13px 22px;border-radius:30px;
+ display:none;font-size:12px;max-width:90%;text-align:center;
+}
+#secretStar{
+ position:fixed;bottom:10px;right:15px;
+ color:#d9b87877;z-index:20;cursor:pointer;
+}
+#finalMessage{white-space:pre-wrap}
+@media(max-width:500px){
+ header{padding:12px}
+ .brand{font-size:9px;letter-spacing:1px}
+ .glass{padding:25px 16px}
+ .gallery{grid-template-columns:1fr 1fr}
+ .garden-rose{font-size:55px}
+ .heart-stage{transform:scale(.8)}
+}
 </style>
 </head>
+
 <body>
+<div id="background"></div>
+<div id="stars"></div>
+<div id="petals"></div>
+<canvas id="fireworks"></canvas>
+<div id="toast"></div>
+
+<!-- SECRET LOCK -->
+<section id="lock">
+ <div class="lock-card">
+  <div class="eyebrow">A private little universe</div>
+  <div class="lock-icon">🔐</div>
+  <h2 style="font-size:32px">The Heart Vault</h2>
+  <div class="divider"></div>
+  <p>Somewhere in this universe, a special message is waiting for someone special.</p>
+  <br>
+  <input id="unlockName" type="text" placeholder="Enter your secret name">
+  <div class="lock-error" id="lockError"></div>
+  <button class="primary" style="width:100%" onclick="unlock()">UNLOCK MY UNIVERSE ❤️</button>
+  <p class="footer">A THOUSAND APOLOGIES · EST. WITH LOVE</p>
+ </div>
+</section>
+
+<div id="app">
+
 <header>
-  <h1>🌈 Color Day Celebration 🌈</h1>
-  <p>Wear your favourite colour, spread happiness and make memories!</p>
+ <div class="brand">M · THE APOLOGY UNIVERSE</div>
+ <div class="header-actions">
+  <button class="small-btn" onclick="toggleMusic()">♫ MUSIC</button>
+  <button class="small-btn" onclick="go('home')">⌂ HOME</button>
+ </div>
 </header>
-<main>
-  <section class="panel">
-    <h2>🎨 Choose Your Colour</h2>
-    <div class="colors">
-      <button class="color" style="background:#ff8eaa" onclick="chooseColor('Pink')">💗 Pink</button>
-      <button class="color" style="background:#ffdc62" onclick="chooseColor('Yellow')">💛 Yellow</button>
-      <button class="color" style="background:#78b7ff" onclick="chooseColor('Blue')">💙 Blue</button>
-      <button class="color" style="background:#8ce0a5" onclick="chooseColor('Green')">💚 Green</button>
-      <button class="color" style="background:#b99aff" onclick="chooseColor('Purple')">💜 Purple</button>
-      <button class="color" style="background:#ffad70" onclick="chooseColor('Orange')">🧡 Orange</button>
-      <button class="color" style="background:#eeeeee" onclick="chooseColor('White')">🤍 White</button>
-      <button class="color" style="background:#555;color:white" onclick="chooseColor('Black')">🖤 Black</button>
-    </div>
-    <div id="chosen">Your favourite colour will appear here.</div>
-  </section>
 
-  <section class="panel">
-    <h2>💌 Share Your Color Day Wish</h2>
-    <form id="wishForm">
-      <input id="studentName" maxlength="35" placeholder="Your name" required>
-      <textarea id="studentWish" maxlength="180" placeholder="Write your wish or message..." required></textarea>
-      <button class="submit" type="submit">✨ Share My Wish</button>
-    </form>
-    <p id="status" role="status"></p>
-    <h2 style="margin-top:24px">💖 Wishes From Everyone</h2>
-    <div id="wishList" class="wish-list"><p>Connect Supabase to load shared wishes.</p></div>
-  </section>
+<audio id="music" loop></audio>
 
-  <section class="panel">
-    <h2>🎉 Color Day Activities</h2>
-    <div class="activities">
-      <div class="activity"><b>🌈 Colour Dress-Up</b>Wear your favourite colour and take a group photo.</div>
-      <div class="activity"><b>🎯 Colour Hunt</b>Find five objects around you in your chosen colour.</div>
-      <div class="activity"><b>📸 Photo Corner</b>Take a creative picture with your friends.</div>
-      <div class="activity"><b>🤝 Kindness Challenge</b>Make someone smile with one kind action.</div>
-    </div>
-  </section>
-  <section class="panel" style="text-align:center">
-    <h2>💫 Our Color Day Promise</h2>
-    <p>We celebrate every colour, respect everyone, share kindness and make beautiful memories together!</p>
-    <button class="submit" onclick="celebrate()">🎊 Celebrate Color Day</button>
-  </section>
-</main>
-<footer>Made with ❤️ for a colourful day</footer>
+<!-- HOME -->
+<section class="screen active" id="home">
+ <div class="eyebrow">An extraordinary apology</div>
+ <div class="hero-rose">🥀</div>
+ <h1>Mehak<br>Shahzadi</h1>
+ <div class="divider"></div>
+ <h2 style="font-size:27px">A Thousand Apologies</h2>
+ <p>This universe was created with one purpose:<br>
+ to say something that words alone cannot express.</p>
+ <br>
+ <button class="primary" onclick="go('garden')">ENTER THE UNIVERSE ✨</button>
+ <p class="footer">SEVEN CHAPTERS · ONE SINCERE HEART</p>
+</section>
 
-<!-- Supabase JavaScript library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- CHAPTER 1 -->
+<section class="screen" id="garden">
+ <div class="eyebrow">Chapter 01 · The rose garden</div>
+ <h2>A Garden For You</h2>
+ <p>Every rose has its own beauty.<br>Every flower has its own story.</p>
+ <div class="glass tilt-card" id="tiltCard">
+  <div class="garden">
+   <span class="garden-rose" onclick="flower(this)">🌹</span>
+   <span class="garden-rose" onclick="flower(this)">🥀</span>
+   <span class="garden-rose" onclick="flower(this)">🌹</span>
+   <span class="garden-rose" onclick="flower(this)">🌷</span>
+   <span class="garden-rose" onclick="flower(this)">🌹</span>
+  </div>
+  <p id="flowerText" class="gold">Touch a flower to discover a message.</p>
+ </div>
+ <button class="primary" onclick="go('heart')">NEXT CHAPTER →</button>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="screen" id="heart">
+ <div class="eyebrow">Chapter 02 · A broken heart</div>
+ <h2>Sometimes Things Break</h2>
+ <p>And sometimes, the first step is admitting that something went wrong.</p>
+ <div class="glass">
+  <div class="heart-stage" id="heartStage">
+   <span class="heart-piece left">❤️</span>
+   <span class="heart-piece right">❤️</span>
+  </div>
+  <p id="repairText">Can we try to make things right?</p>
+  <button class="primary" onclick="repairHeart()">PUT THE PIECES TOGETHER ❤️</button>
+ </div>
+ <button class="secondary" onclick="go('letter')">CONTINUE →</button>
+</section>
+
+<!-- CHAPTER 3 -->
+<section class="screen" id="letter">
+ <div class="eyebrow">Chapter 03 · The letter</div>
+ <h2>Words From My Heart</h2>
+ <div class="heart">💌</div>
+ <div class="glass">
+  <p>Some apologies deserve more than a single sentence.</p>
+  <button class="primary" onclick="showLetter()">OPEN THE LETTER</button>
+  <div class="letter" id="letterPaper">
+   <div style="text-align:center;font-family:Cinzel,serif">FOR MEHAK SHAHZADI</div>
+   <br>
+   Dear Mehak,
+   <br><br>
+   I want to say that I am genuinely sorry.
+   If I hurt you through my words, actions or mistakes,
+   I wish I could take that pain away.
+   <br><br>
+   I know that saying sorry doesn't automatically
+   fix everything. I understand that trust and happiness
+   take time, care and consistent actions.
+   <br><br>
+   I don't want to pressure you to forgive me.
+   I only want you to know that your feelings matter,
+   and I am willing to learn from what happened.
+   <br><br>
+   I hope one day this message makes you smile.
+   <br><br>
+   With a sincere apology,<br>
+   Someone who wishes to make things right. ❤️
+   <br><br>
+   <div style="text-align:center">🌹 ❤️ 🌹</div>
+  </div>
+ </div>
+ <button class="secondary" onclick="go('memories')">NEXT CHAPTER →</button>
+</section>
+
+<!-- CHAPTER 4 -->
+<section class="screen" id="memories">
+ <div class="eyebrow">Chapter 04 · A little gallery</div>
+ <h2>Beautiful Moments</h2>
+ <p>Add your own photographs to make this space personal.</p>
+ <div class="glass">
+  <div class="gallery" id="gallery">
+   <div class="photo">📷<br>Photo 01</div>
+   <div class="photo">📷<br>Photo 02</div>
+   <div class="photo">📷<br>Photo 03</div>
+   <div class="photo">📷<br>Photo 04</div>
+  </div>
+  <div class="upload-area">
+   <label class="gold" for="photos">ADD PHOTOS</label>
+   <input id="photos" type="file" accept="image/*" multiple onchange="addPhotos(event)">
+  </div>
+  <p class="muted" style="font-size:11px">Photos are previewed locally in this browser.</p>
+ </div>
+ <button class="primary" onclick="go('promises')">NEXT CHAPTER →</button>
+</section>
+
+<!-- CHAPTER 5 -->
+<section class="screen" id="promises">
+ <div class="eyebrow">Chapter 05 · The promises</div>
+ <h2>Not Just Words</h2>
+ <div class="glass">
+  <div class="heart">🤍</div>
+  <h3>Four Things I Want To Remember</h3>
+  <div class="divider"></div>
+  <p>01 — Listen with patience.</p>
+  <p>02 — Respect your feelings.</p>
+  <p>03 — Take responsibility for mistakes.</p>
+  <p>04 — Show change through actions.</p>
+  <br>
+  <p class="gold">An apology is the beginning, not the end.</p>
+ </div>
+ <button class="primary" onclick="go('voice')">NEXT CHAPTER →</button>
+</section>
+
+<!-- CHAPTER 6 -->
+<section class="screen" id="voice">
+ <div class="eyebrow">Chapter 06 · A voice from the heart</div>
+ <h2>One Personal Message</h2>
+ <div class="glass">
+  <div class="heart">🎙️</div>
+  <p>Record or upload your own apology voice message for Mehak.</p>
+  <br>
+  <button class="primary" id="recordBtn" onclick="recordVoice()">START RECORDING</button>
+  <input type="file" accept="audio/*" id="audioUpload">
+  <audio id="voicePlayer" controls style="width:100%;margin-top:15px;display:none"></audio>
+  <p id="recordStatus" class="muted" style="font-size:12px">Your voice message stays in this browser session.</p>
+ </div>
+ <button class="primary" onclick="go('final')">FINAL CHAPTER →</button>
+</section>
+
+<!-- CHAPTER 7 -->
+<section class="screen" id="final">
+ <div class="eyebrow">Chapter 07 · The final question</div>
+ <div class="heart">❤️</div>
+ <h1>I'm Sorry</h1>
+ <h2>Mehak Shahzadi</h2>
+ <div class="glass">
+  <p>I cannot rewrite the past.<br>
+  But I can try to make better choices from now on.</p>
+  <div class="divider"></div>
+  <h2 style="font-size:29px">Will you forgive me?</h2>
+  <button class="primary" onclick="forgive()">YES, I FORGIVE YOU ❤️</button>
+  <button class="secondary" onclick="notYet()">NOT YET 🥺</button>
+  <p id="finalMessage" style="margin-top:20px"></p>
+ </div>
+</section>
+
+<!-- SECRET FINAL -->
+<section class="screen" id="secret">
+ <div class="eyebrow">A secret chapter · Just for you</div>
+ <div class="heart">💖</div>
+ <h1>Mehak</h1>
+ <h2>The World Is More Beautiful With Kindness</h2>
+ <div class="glass">
+  <p>There is no timer for forgiveness.<br>
+  There is no pressure to answer.<br>
+  And there is no expectation that one website
+  can fix everything.</p>
+  <br>
+  <p class="gold">I just wanted to make you feel appreciated. 🌹</p>
+  <div class="hero-rose">🌹</div>
+  <button class="primary" onclick="go('home')">REVISIT THE UNIVERSE</button>
+ </div>
+</section>
+
+<div id="secretStar" onclick="secretTap()">✦</div>
+</div>
+
 <script>
-/* STEP: Replace these two placeholder values with your Supabase Project URL and Publishable key. */
-const SUPABASE_URL = "https://sxjklfvrdgoyidabyqam.supabase.co/rest/v1/";
-const SUPABASE_KEY = "sb_publishable_ohQrl6yyZz0YuC8P1xV1MA_4DRrU5as";
-
-let db = null;
-const configured = SUPABASE_URL.startsWith("https://") &&
-  !SUPABASE_URL.includes("PASTE_") && !SUPABASE_KEY.includes("PASTE_");
-
-if (configured && window.supabase) {
-  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  loadWishes();
-} else {
-  document.getElementById("wishList").innerHTML =
-    "<p>Database setup baqi hai. README.txt mein diye gaye steps follow karein.</p>";
+// BACKGROUND STARS
+for(let i=0;i<120;i++){
+ const s=document.createElement('i');
+ s.className='star';
+ s.style.left=Math.random()*100+'%';
+ s.style.top=Math.random()*100+'%';
+ s.style.animationDelay=Math.random()*4+'s';
+ s.style.animationDuration=(1+Math.random()*4)+'s';
+ document.getElementById('stars').appendChild(s);
 }
 
-function chooseColor(name) {
-  document.getElementById("chosen").textContent = "Your favourite colour is " + name + "! 🌟";
-  celebrate(18);
+// FLOATING PETALS
+for(let i=0;i<30;i++){
+ const p=document.createElement('span');
+ p.className='petal';
+ p.textContent=['🌹','🌸','✦','♥'][Math.floor(Math.random()*4)];
+ p.style.left=Math.random()*100+'%';
+ p.style.fontSize=(10+Math.random()*16)+'px';
+ p.style.animationDuration=(7+Math.random()*12)+'s';
+ p.style.animationDelay=Math.random()*10+'s';
+ document.getElementById('petals').appendChild(p);
 }
 
-async function loadWishes() {
-  const list = document.getElementById("wishList");
-  if (!db) return;
-  const { data, error } = await db.from("color_day_wishes")
-    .select("id, student_name, wish, created_at")
-    .order("created_at", { ascending: false })
-    .limit(100);
-  if (error) {
-    list.innerHTML = "<p>Wishes load nahi ho sakin. Supabase table aur policies check karein.</p>";
-    console.error(error);
-    return;
-  }
-  if (!data.length) {
-    list.innerHTML = "<p>Abhi koi wish nahi. Pehli wish aap share karein! 💖</p>";
-    return;
-  }
-  list.replaceChildren();
-  data.forEach(item => {
-    const card = document.createElement("article");
-    card.className = "wish";
-    const name = document.createElement("strong");
-    name.textContent = item.student_name;
-    const message = document.createElement("div");
-    message.textContent = item.wish;
-    const date = document.createElement("small");
-    date.textContent = new Date(item.created_at).toLocaleString();
-    card.append(name, message, date);
-    list.append(card);
-  });
+// SECRET UNLOCK
+function unlock(){
+ const value=document.getElementById('unlockName').value.trim();
+ if(value.toLowerCase()==='mehak'){
+  document.getElementById('lock').style.display='none';
+  document.getElementById('app').style.display='block';
+  toast('Welcome to your special universe, Mehak ❤️');
+ }else{
+  document.getElementById('lockError').textContent=
+  'That name does not unlock this universe. Try again.';
+ }
 }
-
-document.getElementById("wishForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const status = document.getElementById("status");
-  const student_name = document.getElementById("studentName").value.trim();
-  const wish = document.getElementById("studentWish").value.trim();
-  if (!student_name || !wish) return;
-  if (!db) {
-    status.textContent = "Pehle Supabase URL aur Publishable key add karein.";
-    return;
-  }
-  status.textContent = "Saving...";
-  const { error } = await db.from("color_day_wishes").insert([{ student_name, wish }]);
-  if (error) {
-    status.textContent = "Save nahi hua. Supabase SQL/policies check karein.";
-    console.error(error);
-    return;
-  }
-  document.getElementById("wishForm").reset();
-  status.textContent = "Your wish is saved for everyone! 🎉";
-  await loadWishes();
+document.getElementById('unlockName').addEventListener('keydown',e=>{
+ if(e.key==='Enter')unlock();
 });
 
-function celebrate(count = 45) {
-  const palette = ["#ff4fa3","#7657ff","#ffd84d","#55dff2","#65d98c","#ff8c42"];
-  for (let i = 0; i < count; i++) {
-    const piece = document.createElement("span");
-    piece.className = "confetti";
-    piece.style.left = Math.random() * 100 + "vw";
-    piece.style.background = palette[Math.floor(Math.random() * palette.length)];
-    piece.style.animationDelay = Math.random() * .8 + "s";
-    piece.style.transform = "rotate(" + Math.random() * 360 + "deg)";
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 4200);
-  }
+// NAVIGATION
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// TOAST
+function toast(msg){
+ const t=document.getElementById('toast');
+ t.textContent=msg;t.style.display='block';
+ setTimeout(()=>t.style.display='none',3000);
+}
+
+// ROSE GARDEN
+const flowerMessages=[
+ 'You deserve beautiful things. 🌹',
+ 'A little kindness can mean a lot. ❤️',
+ 'Every flower tells a different story. 🌷',
+ 'May your days be full of happiness. ✨',
+ 'You are worthy of respect and care. 🤍'
+];
+let flowerIndex=0;
+function flower(el){
+ el.style.transform='scale(1.5) rotate(15deg)';
+ setTimeout(()=>el.style.transform='',600);
+ document.getElementById('flowerText').textContent=
+ flowerMessages[flowerIndex++%flowerMessages.length];
+}
+
+// 3D MOUSE EFFECT
+const tilt=document.getElementById('tiltCard');
+tilt.addEventListener('mousemove',e=>{
+ if(innerWidth<700)return;
+ const r=tilt.getBoundingClientRect();
+ const x=(e.clientX-r.left)/r.width-.5;
+ const y=(e.clientY-r.top)/r.height-.5;
+ tilt.style.transform=`rotateY(${x*12}deg) rotateX(${-y*10}deg)`;
+});
+tilt.addEventListener('mouseleave',()=>tilt.style.transform='');
+
+// HEART REPAIR
+function repairHeart(){
+ const stage=document.getElementById('heartStage');
+ stage.classList.add('fixed');
+ document.getElementById('repairText').textContent=
+ 'Sometimes healing begins with an honest apology. ❤️';
+ toast('A little hope, a little kindness. ❤️');
+}
+
+// LETTER
+function showLetter(){
+ document.getElementById('letterPaper').classList.add('show');
+}
+
+// PHOTO GALLERY
+function addPhotos(event){
+ const files=Array.from(event.target.files).slice(0,8);
+ const gallery=document.getElementById('gallery');
+ gallery.innerHTML='';
+ files.forEach(file=>{
+  const url=URL.createObjectURL(file);
+  const img=document.createElement('img');
+  img.src=url;
+  img.alt='Personal photo';
+  const box=document.createElement('div');
+  box.className='photo';
+  box.appendChild(img);
+  gallery.appendChild(box);
+ });
+ if(!files.length)gallery.innerHTML='No photos selected.';
+}
+
+// VOICE RECORDING
+let recorder=null,stream=null,chunks=[];
+async function recordVoice(){
+ const btn=document.getElementById('recordBtn');
+ const status=document.getElementById('recordStatus');
+ if(recorder && recorder.state==='recording'){
+  recorder.stop();
+  btn.textContent='START RECORDING';
+  return;
+ }
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  chunks=[];
+  recorder=new MediaRecorder(stream);
+  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  recorder.onstop=()=>{
+   const blob=new Blob(chunks,{type:recorder.mimeType});
+   const url=URL.createObjectURL(blob);
+   const player=document.getElementById('voicePlayer');
+   player.src=url;player.style.display='block';
+   stream.getTracks().forEach(t=>t.stop());
+   status.textContent='Your recording is ready. Press play to listen.';
+  };
+  recorder.start();
+  btn.textContent='STOP RECORDING';
+  status.textContent='Recording... Speak from your heart.';
+ }catch(e){
+  status.textContent='Microphone access unavailable. Try uploading an audio file instead.';
+ }
+}
+
+// AUDIO UPLOAD
+document.getElementById('audioUpload').addEventListener('change',e=>{
+ const file=e.target.files[0];
+ if(file){
+  const player=document.getElementById('voicePlayer');
+  player.src=URL.createObjectURL(file);
+  player.style.display='block';
+  document.getElementById('recordStatus').textContent='Your audio is ready to play.';
+ }
+});
+
+// MUSIC
+let musicOn=false;
+function toggleMusic(){
+ const audio=document.getElementById('music');
+ if(!audio.src){
+  toast('Add a royalty-free music file URL in the audio element first.');
+  return;
+ }
+ if(musicOn){audio.pause();musicOn=false}
+ else{
+  audio.play().then(()=>musicOn=true).catch(()=>toast('Tap again to start music.'));
+ }
+}
+
+// FIREWORKS
+function fireworks(){
+ const c=document.getElementById('fireworks');
+ const ctx=c.getContext('2d');
+ c.width=innerWidth;c.height=innerHeight;
+ let particles=[];
+ for(let k=0;k<6;k++){
+  const cx=Math.random()*c.width;
+  const cy=Math.random()*c.height*.65;
+  for(let i=0;i<90;i++){
+   const a=Math.PI*2*i/90;
+   const speed=2+Math.random()*5;
+   particles.push({
+    x:cx,y:cy,vx:Math.cos(a)*speed,
+    vy:Math.sin(a)*speed,life:100,
+    hue:Math.random()*30+340,size:Math.random()*3+1
+   });
+  }
+ }
+ function animate(){
+  ctx.clearRect(0,0,c.width,c.height);
+  particles.forEach(p=>{
+   p.x+=p.vx;p.y+=p.vy;p.vy+=.025;p.life--;
+   ctx.fillStyle=`hsla(${p.hue},100%,70%,${p.life/100})`;
+   ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();
+  });
+  particles=particles.filter(p=>p.life>0);
+  if(particles.length)requestAnimationFrame(animate);
+  else ctx.clearRect(0,0,c.width,c.height);
+ }
+ animate();
+}
+
+// FINAL ANSWER
+function forgive(){
+ document.getElementById('finalMessage').textContent=
+ 'Thank you for hearing me out, Mehak. ❤️ May this be a beautiful reminder of kindness and understanding.';
+ fireworks();
+ setTimeout(()=>go('secret'),2500);
+}
+function notYet(){
+ document.getElementById('finalMessage').textContent=
+ 'I understand. Take your time, Mehak. I respect your feelings and will not rush you. 🤍';
+}
+
+// HIDDEN SURPRISE: TAP THE SMALL STAR FIVE TIMES
+let taps=0,tapTimer;
+function secretTap(){
+ taps++;
+ clearTimeout(tapTimer);
+ tapTimer=setTimeout(()=>taps=0,2500);
+ if(taps>=5){
+  taps=0;
+  go('secret');
+  fireworks();
+  toast('You discovered the secret chapter! ✨');
+ }else{
+  toast('A little secret is waiting... '+(5-taps)+' more taps.');
+ }
+}
+
+// RESIZE CANVAS
+window.addEventListener('resize',()=>{
+ const c=document.getElementById('fireworks');
+ c.width=innerWidth;c.height=innerHeight;
+});
 </script>
 </body>
 </html>
